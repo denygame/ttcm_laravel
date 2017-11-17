@@ -1,0 +1,19 @@
+dùng để bảo vệ route
+
+vd: khi route đến profile thì phải check đăng nhập chưa
+
+Xem LoginPageMiddelware.php
+
+Lưu ý khi tạo 1 middelware phải khai báo định danh ở class Kernel.php
+
+
+
+protected $routeMiddleware = [
+'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+'can' => \Illuminate\Auth\Middleware\Authorize::class,
+'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+'login'=> \App\Http\Middleware\LoginPageMiddleware::class
+];

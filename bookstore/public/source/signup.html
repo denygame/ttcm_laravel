@@ -1,0 +1,673 @@
+<!doctype html>
+<html class="no-js"lang="en"dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible"content="ie=edge">
+  <meta name="viewport"content="width=device-width", initial-scale="1.0">
+  <title> signup page - t2hd</title>
+  <link rel="stylesheet"href="css/foundation.css">
+  <link rel="stylesheet"href="css/app.css">
+  <link rel="stylesheet"href="css/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
+<body class="regular">
+ <!-- SECTION TOPBAR -->
+ <header>
+   <section id="topbar"class="show-for-large">
+     <div class="row topbar-wrap">
+       <div class="large-6 columns social-link">
+         <ul>
+           <li>
+             <a href="">
+               <i class="fa fa-facebook"></i>
+             </a>
+           </li>
+           <li>
+             <a href="">
+               <i class="fa fa-rss"></i>
+             </a>
+           </li>
+           <li>
+             <a href="">
+               <i class="fa fa-twitter"></i>
+             </a>
+           </li>
+           <li>
+             <a href="">
+               <i class="fa fa-google-plus"></i>
+             </a>
+           </li>
+         </ul>
+       </div>
+
+       <!--Thanh top head -->
+       <div class="large-6 columns signup relative">
+         <!--Lúc chưa đăng nhập-->
+         <a href=""class="float-right login-link">Sign Up / Login</a>
+         <!--Lúc đã đăng nhập-->
+         <a href=""class="float-right login-link" style="display: none">Chào bạn <span>Tuấn</span></a>
+
+         <!--Lúc chưa đăng nhập show-->
+         <div class="absolute login-popup regular">
+           <span class="login-popup-title bold c-sad">LOGIN</span>
+           <form>
+             <span class="login-popup-lable">Username</span>
+             <div class="lp-input-wrap">
+               <input type="text"name="">
+             </div>
+             <span class="login-popup-lable">Password</span>
+             <div class="lp-input-wrap">
+               <input type="password"name="">
+             </div>
+             <span class="login-popup-link c-dark light"><a href="">Login</a> or New to Goodly? <a href=""class="bold c-sexy"style="font-size: 14px">Register</a></span>
+           </form>
+         </div>
+
+         <!--Lúc đã đăng nhập show-->
+         <div class="absolute login-popup regular" style="display: none; width: 200px;">
+           <span class="login-popup-title bold c-sad">Trang cá nhân</span>
+           <div >
+             <a href=""><i class="fa fa-hand-o-right"></i> Thông tin cá nhân</a>
+           </div >
+           <div >
+             <a href=""><i class="fa fa-hand-o-right"></i> Đơn hàng</a>
+           </div>
+           <div >
+             <a href=""><i class="fa fa-hand-o-right"></i> Thông báo <span class="my-count-popup">100</span></a>
+           </div>
+         </div>
+       </div>
+       <!--Kết thúc thanh top head-->
+     </div>
+   </section>
+   <!-- END TOPBAR -->
+
+   <!-- MOBILE TOP BAR -->
+   <section id="mobile-topbar"class="hide-for-large">
+     <div class="row mobile-topbar-wrap">
+       <div class="small-6 medium-6 columns top-mail-wrap">
+         <a href=""class="float-left"><i class="fa fa-envelope-o"></i>T2HD@gmail.com</a>
+       </div>
+       <div class="small-6 medium-6 columns top-phone-wrap">
+         <a href=""class="float-right"><i class="fa fa-phone"></i>+84 1234 567</a>
+       </div>
+     </div>
+   </section>
+   <!-- END MOBILE TOPBAR -->
+
+   <!-- LOGO BAR -->
+   <section id="logobar">
+     <div class="row logo-wrap">
+       <div class="large-4 columns phone-link show-for-large">
+         <a href=""class="float-left c-sexy"><i class="fa fa-phone-square c-fun"></i>(01) 123 456 789</a>
+       </div>
+       <div class="large-4 columns logo-img">
+         <img src="img/logo/1.png"class="float-center">
+       </div>
+
+       <!--Giỏ hàng-->
+       <div class="large-4 columns shopping-cart show-for-large relative">
+         <a href=""class="float-right relative center-content cart-icon">
+           <i class="fa fa-shopping-cart c-clear"></i>
+           <span class="absolute cart-count-wrap center-content">
+              <span class="cart-count">2</span>
+            </span>
+         </a>
+         <div class="cart-hover empty-cart absolute medium c-sad show-for-large">
+           <span>You have no items in your shopping cart.</span>
+         </div>
+         <div class="cart-hover item-cart absolute medium c-sad show-for-large">
+           <span>You have <span class="cart-count">2</span> items in your shopping cart.</span>
+           <div class="my-cart-list">
+             <div class="cart-item-wrap">
+               <div class="cart-item-img">
+                 <img src="img/product/book.jpg">
+               </div>
+               <div class="cart-item-text">
+                 <a href="">Product name name name</a>
+                 <a href=""><span style="color: #ec6a54">58.00$</span> <span style="text-decoration: line-through">120.000đ</span></a>
+                 <h6>1</h6>
+               </div>
+             </div>
+             <div class="cart-item-wrap">
+               <div class="cart-item-img">
+                 <img src="img/product/book.jpg">
+               </div>
+               <div class="cart-item-text">
+                 <a href="">Product name name name</a>
+                 <a href=""><span style="color: #ec6a54">58.00$</span> <span style="text-decoration: line-through">120.000đ</span></a>
+                 <h6>1</h6>
+               </div>
+             </div>
+             <div class="cart-item-wrap">
+               <div class="cart-item-img">
+                 <img src="img/product/book.jpg">
+               </div>
+               <div class="cart-item-text">
+                 <a href="">Product name name name</a>
+                 <a href=""><span style="color: #ec6a54">58.00$</span> <span style="text-decoration: line-through">120.000đ</span></a>
+                 <h6>1</h6>
+               </div>
+             </div>
+             <div class="cart-item-wrap">
+               <div class="cart-item-img">
+                 <img src="img/product/book.jpg">
+               </div>
+               <div class="cart-item-text">
+                 <a href="">Product name name name</a>
+                 <a href=""><span style="color: #ec6a54">58.00$</span> <span style="text-decoration: line-through">120.000đ</span></a>
+                 <h6>1</h6>
+               </div>
+             </div>
+             <div class="cart-item-wrap">
+               <div class="cart-item-img">
+                 <img src="img/product/book.jpg">
+               </div>
+               <div class="cart-item-text">
+                 <a href="">Product name name name</a>
+                 <a href=""><span style="color: #ec6a54">58.00$</span> <span style="text-decoration: line-through">120.000đ</span></a>
+                 <h6>1</h6>
+               </div>
+             </div>
+           </div>
+           <div class="cart-total-button-wrap">
+             <span class="text-upp regular total">CART SUBTOTAL:<span>58.00$</span></span>
+             <div  class="button-wrap horizontal-center">
+               <a href="" class="cart-popup-button text-upp">GIỎ HÀNG<i class="fa fa-angle-double-right flloat-right"></i></a>
+             </div>
+             <div  class="button-wrap horizontal-center">
+               <a href="" class="cart-popup-button text-upp b-fun">THANH TOÁN<i class="fa fa-angle-double-right flloat-right"></i></a>
+             </div>
+           </div>
+         </div>
+         <!--Kết thúc giỏ hàng-->
+
+       </div>
+     </div>
+   </section>
+   <!-- END LOGO BAR -->
+
+   <!-- MENU BAR -->
+   <nav id="menu"class="show-for-large">
+     <div class="row horizontal-center menu-wrap">
+       <ul class="centered">
+         <li>
+           <a href=""title="">TRANG CHỦ</a>
+         </li>
+         <li>
+           <a href=""title="">HOT<i class="fa fa-angle-down"></i></a>
+           <ul class="dropdown-menu absolute large-dropdown catogory-dropdown">
+             <li>
+               <ul class="catogory-title-ul">
+                 <li><a href="#cat-1">SẢN PHẨM MỚI<i class="fa fa-angle-double-right"></i></a></li>
+                 <li><a href="#cat-2">SIÊU GIẢM GIÁ<i class="fa fa-angle-double-right"></i></a></li>
+                 <li><a href="#cat-3">BÁN CHẠY NHẤT<i class="fa fa-angle-double-right"></i></a></li>
+               </ul>
+             </li>
+             <li>
+               <ul class="catogory-view-ul absolute cato-active" id="cat-1">
+                 <li>
+                   <div class="product-item" style="position: relative">
+                     <div class="star-6-green"><span>50%</span></div>
+                     <div class="cato-img-wrap" style="margin-top: -20px;">
+                       <img src="img/product/book.jpg" class="my-img centered">
+                     </div>
+                     <a>catogory view title</a>
+                     <a>Giá: <span>120.000đ</span></a>
+                     <div class="product-hover absolute">
+                       <a href=""><i class="fa fa-shopping-cart"style="padding-right:5px"></i>ADD TO CART</a>
+                     </div>
+                   </div>
+                 </li>
+                 <li>
+                   <div class="product-item" style="position: relative">
+                     <div class="star-6-green"><span>50%</span></div>
+                     <div class="cato-img-wrap" style="margin-top: -20px;">
+                       <img src="img/product/book.jpg" class="my-img centered">
+                     </div>
+                     <a>catogory view title</a>
+                     <a>Giá: <span>120.000đ</span></a>
+                     <div class="product-hover absolute">
+                       <a href=""><i class="fa fa-shopping-cart"style="padding-right:5px"></i>ADD TO CART</a>
+                     </div>
+                   </div>
+                 </li>
+                 <li>
+                   <div class="product-item" style="position: relative">
+                     <div class="star-6-green"><span>50%</span></div>
+                     <div class="cato-img-wrap" style="margin-top: -20px;">
+                       <img src="img/product/book.jpg" class="my-img centered">
+                     </div>
+                     <a>catogory view title</a>
+                     <a>Giá: <span>120.000đ</span></a>
+                     <div class="product-hover absolute">
+                       <a href=""><i class="fa fa-shopping-cart"style="padding-right:5px"></i>ADD TO CART</a>
+                     </div>
+                   </div>
+                 </li>
+                 <li>
+                   <div class="product-item" style="position: relative">
+                     <div class="star-6-green"><span>50%</span></div>
+                     <div class="cato-img-wrap" style="margin-top: -20px;">
+                       <img src="img/product/book.jpg" class="my-img centered">
+                     </div>
+                     <a>catogory view title</a>
+                     <a>Giá: <span>120.000đ</span></a>
+                     <div class="product-hover absolute">
+                       <a href=""><i class="fa fa-shopping-cart"style="padding-right:5px"></i>ADD TO CART</a>
+                     </div>
+                   </div>
+                 </li>
+               </ul>
+
+               <ul class="catogory-view-ul absolute" id="cat-2">
+                 <li>
+                   <div class="product-item" style="position: relative">
+                     <div class="star-6-red"><span>50%</span></div>
+                     <div class="cato-img-wrap" style="margin-top: -20px;">
+                       <img src="img/product/book.jpg" class="my-img centered">
+                     </div>
+                     <a>catogory view title</a>
+                     <a>Giá: <span>120.000đ</span></a>
+                     <div class="product-hover absolute">
+                       <a href=""><i class="fa fa-shopping-cart"style="padding-right:5px"></i>ADD TO CART</a>
+                     </div>
+                   </div>
+                 </li>
+                 <li>
+                   <div class="product-item" style="position: relative">
+                     <div class="star-6-red"><span>50%</span></div>
+                     <div class="cato-img-wrap" style="margin-top: -20px;">
+                       <img src="img/product/book.jpg" class="my-img centered">
+                     </div>
+                     <a>catogory view title</a>
+                     <a>Giá: <span>120.000đ</span></a>
+                     <div class="product-hover absolute">
+                       <a href=""><i class="fa fa-shopping-cart"style="padding-right:5px"></i>ADD TO CART</a>
+                     </div>
+                   </div>
+                 </li>
+                 <li>
+                   <div class="product-item" style="position: relative">
+                     <div class="star-6-red"><span>50%</span></div>
+                     <div class="cato-img-wrap" style="margin-top: -20px;">
+                       <img src="img/product/book.jpg" class="my-img centered">
+                     </div>
+                     <a>catogory view title</a>
+                     <a>Giá: <span>120.000đ</span></a>
+                     <div class="product-hover absolute">
+                       <a href=""><i class="fa fa-shopping-cart"style="padding-right:5px"></i>ADD TO CART</a>
+                     </div>
+                   </div>
+                 </li>
+                 <li>
+                   <div class="product-item" style="position: relative">
+                     <div class="star-6-red"><span>50%</span></div>
+                     <div class="cato-img-wrap" style="margin-top: -20px;">
+                       <img src="img/product/book.jpg" class="my-img centered">
+                     </div>
+                     <a>catogory view title</a>
+                     <a>Giá: <span>120.000đ</span></a>
+                     <div class="product-hover absolute">
+                       <a href=""><i class="fa fa-shopping-cart"style="padding-right:5px"></i>ADD TO CART</a>
+                     </div>
+                   </div>
+                 </li>
+               </ul>
+
+               <ul class="catogory-view-ul absolute" id="cat-3">
+                 <li>
+                   <div class="product-item" style="position: relative">
+                     <div class="star-6-orange"><span>50%</span></div>
+                     <div class="cato-img-wrap" style="margin-top: -20px;">
+                       <img src="img/product/book.jpg" class="my-img centered">
+                     </div>
+                     <a>catogory view title</a>
+                     <a>Giá: <span>120.000đ</span></a>
+                     <div class="product-hover absolute">
+                       <a href=""><i class="fa fa-shopping-cart"style="padding-right:5px"></i>ADD TO CART</a>
+                     </div>
+                   </div>
+                 </li>
+                 <li>
+                   <div class="product-item" style="position: relative">
+                     <div class="star-6-orange"><span>50%</span></div>
+                     <div class="cato-img-wrap" style="margin-top: -20px;">
+                       <img src="img/product/book.jpg" class="my-img centered">
+                     </div>
+                     <a>catogory view title</a>
+                     <a>Giá: <span>120.000đ</span></a>
+                     <div class="product-hover absolute">
+                       <a href=""><i class="fa fa-shopping-cart"style="padding-right:5px"></i>ADD TO CART</a>
+                     </div>
+                   </div>
+                 </li>
+                 <li>
+                   <div class="product-item" style="position: relative">
+                     <div class="star-6-orange"><span>50%</span></div>
+                     <div class="cato-img-wrap" style="margin-top: -20px;">
+                       <img src="img/product/book.jpg" class="my-img centered">
+                     </div>
+                     <a>catogory view title</a>
+                     <a>Giá: <span>120.000đ</span></a>
+                     <div class="product-hover absolute">
+                       <a href=""><i class="fa fa-shopping-cart"style="padding-right:5px"></i>ADD TO CART</a>
+                     </div>
+                   </div>
+                 </li>
+                 <li>
+                   <div class="product-item" style="position: relative">
+                     <div class="star-6-orange"><span>50%</span></div>
+                     <div class="cato-img-wrap" style="margin-top: -20px;">
+                       <img src="img/product/book.jpg" class="my-img centered">
+                     </div>
+                     <a>catogory view title</a>
+                     <a>Giá: <span>120.000đ</span></a>
+                     <div class="product-hover absolute">
+                       <a href=""><i class="fa fa-shopping-cart"style="padding-right:5px"></i>ADD TO CART</a>
+                     </div>
+                   </div>
+                 </li>
+
+               </ul>
+             </li>
+           </ul>
+         </li>
+         <li>
+           <a href=""title="">DANH MỤC<i class="fa fa-angle-down"></i></a>
+           <ul class="dropdown-menu absolute large-dropdown group-item-dropdown">
+             <li>
+               <ul>
+                 <li><a href="">Group Item Title</a></li>
+                 <li><a href="">Group Item Dropdown</a></li>
+                 <li><a href="">Group Item Dropdown</a></li>
+                 <li><a href="">Group Item Dropdown</a></li>
+                 <li><a href="">Group Item Dropdown</a></li>
+               </ul>
+             <li>
+               <ul>
+                 <li><a href="">Group Item Title</a></li>
+                 <li><a href="">Group Item Dropdown</a></li>
+                 <li><a href="">Group Item Dropdown</a></li>
+                 <li><a href="">Group Item Dropdown</a></li>
+                 <li><a href="">Group Item Dropdown</a></li>
+               </ul>
+             <li>
+               <ul>
+                 <li><a href="">Group Item Title</a></li>
+                 <li><a href="">Group Item Dropdown</a></li>
+                 <li><a href="">Group Item Dropdown</a></li>
+                 <li><a href="">Group Item Dropdown</a></li>
+                 <li><a href="">Group Item Dropdown</a></li>
+               </ul>
+             </li>
+           </ul>
+         </li>
+         <li><a href=""title="">GIỚI THIỆU</i></a></li>
+         <li><a href=""title="">LIÊN HỆ</i></a></li>
+         <li><i class="fa fa-search search-icon"></i></li>
+       </ul>
+     </div>
+   </nav>
+   <!-- END MENUBAR -->
+
+   <!-- SEARCH SECTION -->
+   <section id="search" class="fullwidth vertical-center relative">
+     <div class="cancel-wrap absolute">
+       <i class="fa fa-times"></i>
+     </div>
+     <div class="search-input-wrap relative">
+       <div class="input-border">
+         <input type="text"name=""class="search-input"placeholder="Search item here ...">
+         <button type="submit"><i class="fa fa-search"></i></button>
+       </div>
+     </div>
+   </section>
+   <!-- END SEARCH SECTION -->
+
+   <!-- LOGIN MOBILE SECTION -->
+
+   <!--Lúc chưa login-->
+   <section id="" class="login-mobile fullwidth vertical-center relative" style="display: none">
+     <div class="cancel-wrap absolute">
+       <i class="fa fa-times"></i>
+     </div>
+     <div class="mobile-login-popup regular">
+       <span class="login-popup-title bold c-sad">LOGIN</span>
+       <form>
+         <span class="login-popup-lable">Username</span>
+         <div class="lp-input-wrap">
+           <input type="text"name="">
+         </div>
+         <span class="login-popup-lable">Password</span>
+         <div class="lp-input-wrap">
+           <input type="password"name="">
+         </div>
+         <span class="login-popup-link c-dark light"><a href="">Login</a> or New to Goodly? <a href=""class="bold c-sexy"style="font-size: 14px">Register</a></span>
+       </form>
+     </div>
+   </section>
+
+   <!--Lúc đã login-->
+   <section id="customer-mobile" class="login-mobile fullwidth vertical-center relative">
+     <div class="cancel-wrap absolute">
+       <i class="fa fa-times"></i>
+     </div>
+     <div class="mobile-login-popup regular">
+       <span class="login-popup-title bold c-sad">Trang cá nhân</span>
+       <div >
+         <a href=""><i class="fa fa-hand-o-right"></i> Thông tin cá nhân</a>
+       </div >
+       <div >
+         <a href=""><i class="fa fa-hand-o-right"></i> Đơn hàng</a>
+       </div>
+       <div >
+         <a href=""><i class="fa fa-hand-o-right"></i> Thông báo <span class="my-count-popup">100</span></a>
+       </div>
+     </div>
+   </section>
+
+   <!-- END LOGIN MOBILE SECTION -->
+
+
+   <!-- MOBILE MENUBAR -->
+   <nav id="mobile-menu"class="hide-for-large">
+     <div class="row mobile-menu-wrap">
+       <ul>
+         <li id="mobile-menu-btn"><a href=""><i class="fa fa-bars"></i></a></li>
+         <li id="userBtn"><a><i class="fa fa-user"></i></a></li>
+         <li><a><i class="fa fa-search search-icon-mobile"></i></a></li>
+         <li><a href=""><i class="fa fa-shopping-cart"></i><span class="mobile-cart-count">(10)</span></a></li>
+       </ul>
+     </div>
+   </nav>
+   <!-- END MOBILE MENUBAR -->
+
+   <!-- MOBILE SIDE MENU-->
+   <section id="mobile-side-menu"class="hide-for-large my-scroll">
+     <div class="row side-menu-cancel center-content"style="padding:2px;">
+       <i class="fa fa-times"style="color: #fff;font-size: 20px; cursor: pointer"></i>
+     </div>
+     <div class="mobile-sidemenu-wrap ">
+       <ul class="centered ">
+         <li class="my"><a href=""title="">HOME</a></li>
+         <li ><a title=""class="my-dropdown-hot">HOT<i class="fa fa-angle-down"></i></a>
+           <ul class="my-dropdown-hot-content">
+             <li><a href="">sản phẩm mới</a></li>
+             <li><a href="">siêu giảm giá</a></li>
+             <li><a href="">bán chạy nhất</a></li>
+
+           </ul>
+         </li>
+         <li ><a title="" class="my-dropdown-cate">DANH MỤC<i class="fa fa-angle-down"></i></a>
+           <ul class="my-dropdown-cate-content">
+             <li><a href="">danh mục</a></li>
+             <li><a href="">danh mục</a></li>
+             <li><a href="">danh mục</a></li>
+             <li><a href="">danh mục</a></li>
+             <li><a href="">danh mục</a></li>
+             <li><a href="">danh mục</a></li>
+             <li><a href="">danh mục</a></li>
+             <li><a href="">danh mục</a></li>
+             <li><a href="">danh mục</a></li>
+             <li><a href="">danh mục</a></li>
+           </ul>
+         </li>
+         <li class="my"><a href=""title="">GIỚI THIỆU</a></li>
+         <li class="my"><a href=""title="">LIÊN HỆ</a></li>
+       </ul>
+     </div>
+   </section>
+   <!-- END MOBILE SIDE MENU -->
+ </header>
+      <!-- END HEADER -->
+
+      <!-- PAGE ADDRESS  -->
+      <section id="page-address">
+        <div class="row page-address-wrap">
+          <div class="small-12 medium-12 large-6 columns page-name">
+            <span class="float-left c-sexy medium">ĐĂNG KÝ</span>
+          </div>
+          <div class="small-12 medium-12 large-6 columns page-add">
+            <span class="float-right medium">
+              <a href=""class="c-light">Trang chủ</a>
+              <a href=""class="c-light">Đăng ký</a>
+            </span>
+          </div>
+        </div>
+      </section>
+      <!-- END PAGE ADDRESS -->
+
+      <!-- MAIN PRODUCT PAGE -->
+      <main>
+      <div class="row signup-wrap">
+        <form>
+        <span class="text-cap">sign up</span>
+          <div class="row login-form-wrap">
+            <span>Username or email address *</span>
+            <input type="text" name="">
+            <span>First Name *</span>
+            <input type="text" name="">
+            <span>Last Name *</span>
+            <input type="text" name="">
+            <span>Sex *</span>
+            <select>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+            <span>Password *</span>
+            <input type="password" name="" >
+            <span>Password Again *</span>
+            <input type="password" name="" >
+            <input type="checkbox" name=""><span style="display: inline;padding-left:10px">Remember me</span>
+            <div>
+            <a href="" class="login-button c-dark light text-upp">sign  up</a>
+            </div>
+            <a href="">Lost your password?</a>
+          </div> 
+        </form>
+      </div>
+      </main>
+      <!-- END MAIN SIGNUP PAGE -->
+
+      <!-- FOOTER -->
+ <footer>
+   <div class="row footer-list">
+     <div class="small-6 medium-4 large-2 columns">
+       <span href="" class="footer-list-title">THÔNG TIN</span>
+       <ul>
+         <li><a href="">Trang chủ</a></li>
+         <li><a href="">Hot</a></li>
+         <li><a href="">Danh mục</a></li>
+         <li><a href="">Giới thiệu</a></li>
+         <li><a href="">Liên hệ</a></li>
+       </ul>
+     </div>
+     <div class="small-6 medium-4 large-2 columns">
+       <span href="" class="footer-list-title">CHÍNH SÁCH</span>
+       <ul>
+         <li><a href="">Chính sách bảo mật</a></li>
+         <li><a href="">Chính sách vận chuyển</a></li>
+         <li><a href="">Chính sách đổi trả</a></li>
+         <li><a href="">Điều khoản dịch vụ</a></li>
+         <li><a href="">Quy định sử dụng</a></li>
+       </ul>
+     </div>
+     <div class="small-6 medium-4 large-2 columns">
+       <span href="" class="footer-list-title">HỖ TRỢ </span>
+       <ul>
+         <li><a href="">Tiềm kiếm</a></li>
+         <li><a href="">Hướng dẫn</a></li>
+         <li><a href="">Đăng nhập </a></li>
+         <li><a href="">Đăng ký</a></li>
+         <li><a href="">Giỏ hàng</a></li>
+       </ul>
+     </div>
+     <div class="small-6 medium-4 large-2 columns">
+       <span href="" class="footer-list-title">LIÊN HÊ</span>
+       <ul>
+         <li><a href="">0123456789 </a></li>
+         <li><a href="">T2HD@gmail.com</a></li>
+         <li><a href="">sale.T2HD@gmail.com</a></li>
+         <li><a href="">support.T2HD@gmail.com</a></li>
+       </ul>
+     </div>
+     <div class="small-6 medium-4 large-2 columns">
+       <span href="" class="footer-list-title">NHÀ XUẤT BẢN</span>
+       <ul>
+         <li><a href="">Kim Đồng</a></li>
+         <li><a href="">Nhà văn hóa</a></li>
+         <li><a href="">Giáo dục</a></li>
+         <li><a href="">Nhân văn</a></li>
+       </ul>
+     </div>
+     <div class="small-6 medium-4 large-2 columns">
+       <span href="" class="footer-list-title">lIÊN KẾT</span>
+       <ul>
+         <li><a href="">anybooks.vn</a></li>
+         <li><a href="">tiki.vn</a></li>
+         <li><a href="">bookstore.com</a></li>
+       </ul>
+     </div>
+   </div>
+   <div class="row" style="padding: 30px 0">
+     <div class="large-8 footer-email-wrap columns">
+       <form>
+         <div class="row form-wrap">
+           <div class="small-12 medium-12 large-4 columns form-title">
+             <span class="bold c-sad">ĐĂNG KÝ QUA EMAIL</span>
+           </div>
+           <div class="small-12 medium-12 large-8 columns form-main relative">
+             <div class="form-input">
+               <input type="text" name="mail" placeholder="enter your email address">
+             </div>
+             <div class="form-submit">
+               <button type="submit" class="footer-submit-btn">SUBCRIBE</button>
+             </div>
+           </div>
+         </div>
+       </form>
+     </div>
+     <div class="small-12 medium-12 large-4 footer-social-list columns">
+       <span style="float: left;" class="bold c-sad text-upp">follow us</span>
+       <div class="social-ul-wrap">
+         <ul>
+           <li><a href=""><i class="fa fa-facebook"></i></a></li>
+           <li><a href=""><i class="fa fa-rss"></i></a></li>
+           <li><a href=""><i class="fa fa-twitter"></i></a></li>
+           <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+           <li><a href=""><i class="fa fa-youtube-play"></i></a></li>
+         </ul>
+       </div>
+     </div>
+   </div>
+ </footer>
+      <!-- END FOOTER -->
+
+      <!-- JS DECLARE -->
+      <script src="js/vendor/jquery.js"></script>
+      <script src="js/vendor/what-input.js"></script>
+      <script src="js/vendor/foundation.js"></script>
+      <script src="js/app.js"></script>
+      <!-- END JS DECLARE -->
+    </body>
+    </html>

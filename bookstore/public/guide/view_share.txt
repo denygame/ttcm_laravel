@@ -1,0 +1,16 @@
+share header
+
+vào app\Providers\AppServiceProvider.php
+hàm public function boot
+
+
+public function boot()
+    {
+
+        //view share cho header
+        view()->composer('header',function($view){
+            $cate = Category::all();
+            $view->with('cate',$cate);
+        });
+    }
+

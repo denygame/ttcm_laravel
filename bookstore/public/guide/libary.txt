@@ -1,0 +1,21 @@
+Muốn thêm hàm vào thư viện ta làm như sau
+
+Tạo 1 folder (trong app chẳng hạn - LibaryUnicode)
+Trong folder tạo file php
+Trong file là những hàm cần thêm
+
+Vào composer.json 
+	sau:
+		"psr-4": {
+            "App\\": "app/"
+        }
+    thêm:
+    	"psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+            "app/Libary/function.php"
+        ]
+Xong thì chạy lệnh dump-autoload để refresh
+Ubuntu: composer dump-autoload
+Win: php composer.phar dump--autoload
