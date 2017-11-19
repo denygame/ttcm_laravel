@@ -273,6 +273,66 @@ $(document).ready(function(){
 });
 
 
+// area
+// chua gom function lai
+$(document).ready(function(){
+	$("#city-select1").change(function(){
+		var id_city = $("#city-select1").val();
+
+		$("#ward-select1").html('');
+		$("#ward-select1").html('<option value="">--- Chọn Phường/Xã ---</option>');
+
+		$("#district-select1").html('');
+		$("#district-select1").html('<option value="">--- Chọn Quận/Huyện ---</option>');
+
+		if(id_city!=0){
+			$.ajax({
+				url: "get-district-by-id-city",
+				type: 'GET',
+				cache:false,
+				dataType: 'json',
+				data: {id_city:id_city},
+				success:function(data){
+					for(var i=0;i<data.arrDistrict.length;i++){
+						var id = data.arrDistrict[i]['id'];
+						var name = data.arrDistrict[i]['name'];
+						$("#district-select1").append('<option value="'+id+'">'+name+'</option>');
+					}
+				}
+			});
+		}
+	});
+
+	$("#district-select1").change(function(){
+		var id_district = $("#district-select1").val();
+		$("#ward-select1").html('');
+		$("#ward-select1").html('<option value="">--- Chọn Phường/Xã ---</option>');
+
+		if(id_district!=0){
+			$.ajax({
+				url: "get-ward-by-id-district",
+				type: 'GET',
+				cache:false,
+				dataType: 'json',
+				data: {id_district:id_district},
+				success:function(data){
+					for(var i=0;i<data.arrWard.length;i++){
+						var id = data.arrWard[i]['id'];
+						var name = data.arrWard[i]['name'];
+						$("#ward-select1").append('<option value="'+id+'">'+name+'</option>');
+					}
+				}
+			});
+		}
+
+	});
+});
+
+
+
+
+
+
 // update - profile customer
 $(document).ready(function(){
 	$("#btn-update-profile").click(function(){
@@ -280,13 +340,13 @@ $(document).ready(function(){
 		var email = $("#profile-form").find("input[name='email']").val();
 		var name = $("#profile-form").find("input[name='name']").val();
 		var sex = $("#profile-form").find("input[name='sex']:checked").attr('id');
-		var day = $("#day").val();
-		var month = $("#month").val();
-		var year = $("#year").val();
+		var day = $("#profile-form").find("#day").val();
+		var month = $("#profile-form").find("#month").val();
+		var year = $("#profile-form").find("#year").val();
 		var tel = $("#profile-form").find("input[name='tel']").val();
-		var id_city = $("#city-select").val();
-		var id_district = $("#district-select").val();
-		var id_ward = $("#ward-select").val();
+		var id_city = $("#profile-form").find("#city-select").val();
+		var id_district = $("#profile-form").find("#district-select").val();
+		var id_ward = $("#profile-form").find("#ward-select").val();
 		var address = $("#profile-form").find("input[name='address']").val();
 
 		$.ajax({
@@ -346,28 +406,189 @@ $(document).ready(function(){
 	$(".success-reset-pass").delay(2000).slideUp();
 });
 
+// send mail reset password
+$(document).ready(function(){
+	$("#btn-forgot-pass").click(function(){
+		var _token = $("#frm-forgot-pass").find("input[name='_token']").val();
+		var email = $("#frm-forgot-pass").find("input[name='email']").val();
+		var bool = true;
+		if(isEmail(email)){
+			$.ajax({
+				url: 'check-exists-email',
+				type: 'POST',
+				cache: false,
+				async: false,//set variable when success
+				data:{_token:_token,email:email},
+				success:function(data){
+					if(data == 'false'){
+						$(".errors-forgot-pass").find('h5').html('');
+						$(".errors-forgot-pass").find('h5').html('Email không tồn tại trong hệ thống');
+						$(".errors-forgot-pass").css('display','block');
+						bool=false;
+					}
+				}
+			});
+
+		}else{
+			$(".errors-forgot-pass").find('h5').html('');
+			$(".errors-forgot-pass").find('h5').html('Vui lòng nhập email');
+			$(".errors-forgot-pass").css('display','block');
+			bool=false;
+		}
+
+		return bool;		
+	});
+
+	
+	function isEmail(email) {
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(email);
+	}
+});
+
+
+// reset password with email send 
+$(document).ready(function(){
+	$("#btn-reset-pass-with-email").click(function(){
+		var _token = $("#frm-reset-pass").find("input[name='_token']").attr('value');
+		var email = $("#frm-reset-pass").find("input[name='email']").val();
+		var password = $("#frm-reset-pass").find("input[name='password']").val();
+		var confirm = $("#frm-reset-pass").find("input[name='confirm']").val();
+
+		$.ajax({
+			url: 'password/reset-pass-after-email',
+			type: 'POST',
+			cache: false,
+			dataType: 'json',
+			data:{
+				_token:_token, email:email, password: password, confirm: confirm
+			},
+			success:function(data){
+				if($.isEmptyObject(data.error)){
+					window.location=data.success;
+				}else{
+					backToTop();
+					showError(data.error,".errors-reset-pass-with-email","Có lỗi xảy ra khi cập nhật mật khẩu mới");
+				}
+			}
+		});
+	});
+});
+
+
+// checkout
+$(document).ready(function(){
+	$("#btn-order").click(function(){
+		var checkReceive = false;
+		var arr = [];
+
+		var id_user = $('#frm-info-order').find('input[name="name"]').attr('id');
+		var email = $('#frm-info-order').find('input[name="email"]').val();
+		var name = $('#frm-info-order').find('input[name="name"]').val();
+		var tel = $('#frm-info-order').find('input[name="tel"]').val();
+		var id_city = $('#frm-info-order').find("#city-select").val();
+		var id_district = $('#frm-info-order').find("#district-select").val();
+		var id_ward = $('#frm-info-order').find("#ward-select").val();
+		var address = $('#frm-info-order').find('input[name="address"]').val();
+
+		var gh = $("#frm-order-protocol").find("input[name='gh']:checked").attr('value');
+		var nn = $("#frm-order-protocol").find("input[name='nn']:checked").attr('value');
+		var tt = $("#frm-order-protocol").find("input[name='tt']:checked").attr('value');
+
+		if(nn==1){
+			checkReceive = true;
+			var name1 = $('#frm-order-protocol').find('input[name="name"]').val();
+			var tel1 = $('#frm-order-protocol').find('input[name="tel"]').val();
+			var id_city1 = $('#frm-order-protocol').find("#city-select1").val();
+			var id_district1 = $('#frm-order-protocol').find("#district-select1").val();
+			var id_ward1 = $('#frm-order-protocol').find("#ward-select1").val();
+			var address1 = $('#frm-order-protocol').find('input[name="address"]').val();
+
+			if(!checkReceiveNotMe(name1,0))
+				arr.push('Họ tên người nhận không được trống');
+			if(!checkReceiveNotMe(tel1,0))
+				arr.push('Số điện thoại người nhận không được trống');
+			if(!checkReceiveNotMe(id_city1,1))
+				arr.push('Thành phố người nhận chưa được chọn');
+			if(!checkReceiveNotMe(id_district1,1))
+				arr.push('Quận huyện người nhận chưa được chọn');
+			if(!checkReceiveNotMe(id_ward1,1))
+				arr.push('Phường xã người nhận chưa được chọn');
+			if(!checkReceiveNotMe(address1,0))
+				arr.push('Địa chỉ người nhận không được trống');
+
+			if(arr.length>0){
+				showErrorReceive(arr,".errors-checkout","Thông tin Người nhận không phải tôi chưa đầy đủ");
+				backToTop();
+				return false;
+			}
+		}
+
+		if(!checkReceive){
+			$.ajax({
+				url: 'order-bill',
+				type: 'GET',
+				cache: false,
+				dataType: 'json',
+				data:{
+					id_user:id_user,email:email,name:name,tel:tel,id_city:id_city,id_district:id_district,id_ward:id_ward,
+					address:address,gh:gh,nn:nn,tt:tt
+				},
+				success:function(data){
+					if($.isEmptyObject(data.error)){
+						window.location=data.route;
+					}else{
+						backToTop();
+						showError(data.error,".errors-checkout","Có lỗi xảy ra khi đặt hàng");
+					}
+				}
+			});
+		}else{
+			$.ajax({
+				url: 'order-bill',
+				type: 'GET',
+				cache: false,
+				dataType: 'json',
+				data:{
+					id_user:id_user,email:email,name:name,tel:tel,id_city:id_city,id_district:id_district,id_ward:id_ward,
+					address:address,gh:gh,nn:nn,tt:tt,name1:name1,tel1:tel1,id_city1:id_city1,id_district1:id_district1,
+					id_ward1:id_ward1,address1:address1
+				},
+				success:function(data){
+					if($.isEmptyObject(data.error)){
+						window.location=data.route;
+					}else{
+						backToTop();
+						showError(data.error,".errors-checkout","Có lỗi xảy ra khi đặt hàng");
+					}
+				}
+			});
+		}
+	});
+
+	function checkReceiveNotMe(variable,type) {
+		if(type==0){
+			if(variable==null)return false;
+			return true;
+		}else{
+			if(variable==0)return false;
+			return true;
+		}
+	}
+
+	function showErrorReceive(err, object_alert, title_h5) {
+		$(object_alert).find("h5").html(title_h5);
+		$(object_alert).find("ul").html('');
+		$(object_alert).css('display','block');
+		$.each( err, function( key, value ) {
+			$(object_alert).find("ul").append('<li>'+value+'</li><br/>');
+		});
+	}
+});
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// use for reset-pass and profile-customer
+// use for reset-pass and profile-customer , reset pass with email
 function showError(err, object_alert, title_h5) {
 	$(object_alert).find("h5").html(title_h5);
 	$(object_alert).find("ul").html('');
@@ -446,5 +667,3 @@ function setDays(oMonthSel, oDaysSel, oYearSel)
 	var year = oYearSel.options[oYearSel.selectedIndex].value;	
 	oForm.hidden.value = month + '/' + day + '/' + year;
 }
-
-

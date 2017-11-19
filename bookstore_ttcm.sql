@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 16, 2017 at 05:55 PM
+-- Generation Time: Nov 19, 2017 at 07:45 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -31,13 +31,23 @@ SET time_zone = "+00:00";
 CREATE TABLE `bills` (
   `id` int(10) UNSIGNED NOT NULL,
   `id_customer` int(10) UNSIGNED NOT NULL,
-  `date_bill` date NOT NULL,
-  `total_price` double(8,2) NOT NULL,
-  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_bill` datetime NOT NULL,
+  `total_price` double NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Chưa xử lý',
+  `ship` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `people_recv` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `type_checkout` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `stt_delete` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `bills`
+--
+
+INSERT INTO `bills` (`id`, `id_customer`, `date_bill`, `total_price`, `status`, `ship`, `people_recv`, `type_checkout`, `stt_delete`, `created_at`, `updated_at`) VALUES
+(33, 1, '2017-11-20 01:40:58', 910000, 'Chưa xử lý', 'Giao hàng tiêu chuẩn (Miễn phí)', '--> Thông tin: (Người nhận là customer có id: 1)<br />\n + Họ tên: Nguyễn Thanh Huy<br />\n + Số điện thoại: 0907352619<br />\n + Thành phố: Hồ Chí Minh, Quận huyện: Quận 6, Phường xã: Phường 11<br />\n + Địa chỉ: 839/11 Hậu Giang Phường 11 Quận 6<br />\n', 'Thanh toán khi nhận hàng', 0, '2017-11-19 18:40:58', '2017-11-19 18:40:58');
 
 -- --------------------------------------------------------
 
@@ -54,6 +64,13 @@ CREATE TABLE `bill_detail` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `bill_detail`
+--
+
+INSERT INTO `bill_detail` (`id`, `bill_id`, `book_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
+(69, 33, 78, 13, 70000.00, '2017-11-19 18:40:58', '2017-11-19 18:40:58');
 
 -- --------------------------------------------------------
 
@@ -283,13 +300,13 @@ INSERT INTO `citys` (`id`, `name`) VALUES
 CREATE TABLE `customers` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gender` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `birthday` date NOT NULL,
+  `birthday` date DEFAULT NULL,
   `phone_number` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `city` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `district` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ward` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_city` int(11) NOT NULL,
+  `id_district` int(11) NOT NULL,
+  `id_ward` int(11) NOT NULL,
   `address` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `note_user` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -300,8 +317,11 @@ CREATE TABLE `customers` (
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `name`, `gender`, `email`, `birthday`, `phone_number`, `city`, `district`, `ward`, `address`, `note_user`, `created_at`, `updated_at`) VALUES
-(1, 'Nguyễn Thanh Huy', 'Nam', 'thanhhuy96.gtvt@gmail.com', '1996-02-22', '0907352619', 'test', 'test', 'test', 'test', 1, NULL, NULL);
+INSERT INTO `customers` (`id`, `name`, `gender`, `email`, `birthday`, `phone_number`, `id_city`, `id_district`, `id_ward`, `address`, `note_user`, `created_at`, `updated_at`) VALUES
+(1, 'Nguyễn Thanh Huy', 'Nam', 'thanhhuy96.gtvt@gmail.com', '1996-02-22', '0907352619', 1, 6, 77, '839/11 Hậu Giang Phường 11 Quận 6', 1, NULL, '2017-11-17 15:41:06'),
+(2, 'huy', NULL, 'thanhhuy96.gtvt@gmail.com', NULL, '0907352619', 16, 174, 2651, '839', 0, '2017-11-19 17:06:21', '2017-11-19 17:06:21'),
+(3, 'Test', NULL, 'thanhhuy96.gtvt@gmail.com', NULL, '09090555', 8, 101, 1654, 'aaaaaaa', 0, '2017-11-19 18:33:48', '2017-11-19 18:33:48'),
+(4, 'sd', NULL, 'thanhhuy96.gtvt@gmail.com', NULL, 'sd', 15, 173, 2638, 'dsa', 0, '2017-11-19 18:36:51', '2017-11-19 18:36:51');
 
 -- --------------------------------------------------------
 
@@ -1084,8 +1104,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `name`, `authorities`, `created_at`, `updated_at`) VALUES
-(1, 'thanhhuy96.gtvt@gmail.com', '$2y$10$PbK39extb/OPTB1MFzxFx.W.HFkstk9DUVEAFA5VvihF726Mv6Am6', 'C81GYUh9typsTFA10x3JmWtSLSGelrkXmut8FSxjpFKy07cvcvkmFw3FM5nl', 'Nguyễn Thanh Huy', 0, '2017-11-13 10:05:34', '2017-11-13 10:05:34'),
-(2, 'thanhhuy@gmail.com', '$2y$10$aeTrEEQs9gIdFnPJlb0eKOjhC1ST4k9aAhW6PVg3RggqWZqlHygy2', 'Arn9pTZZYIbkxedaSf69ONgUvB5SagwiSJbVg7DdNqqFDzJLUAoOoy24r98j', '123456', 0, '2017-11-13 12:35:36', '2017-11-13 12:35:36');
+(1, 'thanhhuy96.gtvt@gmail.com', '$2y$10$w1Y5DK4/rpBzDZvTCFQ/r.EE1Eixugl3hT4BAErkBkHfHrcq/YPbq', 'HXMxmhh2L6hHxfaf4WIbYZqx4w3mtpi7VteJ2L2ufin5TDfIZ9l2JR7vfGMq', 'Nguyễn Thanh Huy', 0, '2017-11-13 10:05:34', '2017-11-19 11:39:14'),
+(2, 'thanhhuy@gmail.com', '$2y$10$XGpUbNKmfiO39Qk.SccV3O3iKkGvmx.vPE1WkKX9hMDH0vBuhTauC', 'HGE0KqSqm07aXAXne1cHFnRKUVe1ALHZGW6ulRipWtGithV3LvXvXiLxJtvR', '123456', 0, '2017-11-13 12:35:36', '2017-11-17 16:36:34');
 
 -- --------------------------------------------------------
 
@@ -12188,12 +12208,12 @@ ALTER TABLE `wards`
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 --
 -- AUTO_INCREMENT for table `books`
 --
@@ -12213,7 +12233,7 @@ ALTER TABLE `citys`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `districts`
 --
@@ -12228,7 +12248,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `wards`
 --

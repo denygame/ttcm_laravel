@@ -25,7 +25,7 @@
                 <ul>
                     <li><a href="{{ route('profile') }}">Thông tin cá nhân</a></li>
                     <li><a href="{{ route('resetpass') }}">Đổi mật khẩu</a></li>
-                    <li><a href="">Đơn hàng</a></li>
+                    <li><a href="{{ route('bill') }}">Đơn hàng</a></li>
                 </ul>
             </div>
         </div>

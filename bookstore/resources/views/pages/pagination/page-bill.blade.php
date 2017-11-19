@@ -1,0 +1,37 @@
+@php
+if($total_bills % 5 == 0)
+  $total_page = $total_bills / 5;
+else $total_page = $total_bills / 5 + 1;
+
+$current_page = $ls_bills->currentPage();
+@endphp
+
+@if ($ls_bills->hasPages())
+<ul class="pagination modal-3 float-right">
+  {{-- Previous Page Link --}}
+  @if ($current_page > 1 && $total_page > 1)
+  @if ($ls_bills->onFirstPage())
+  <li><a href="#" class="prev disabled">&laquo</a></li>
+  @else
+  <li><a href="{{ $ls_bills->previousPageUrl() }}" rel="prev" class="prev">&laquo</a></li>
+  @endif
+  @endif
+
+  {{-- Pagination Elements --}}
+  @for ($i = 1; $i <= $total_page; $i++)
+  @if ($i == $current_page)
+  <li><a href="#" class="active">{{$i}}</a></li>
+  @else
+  <li><a href="{{$ls_bills->url($i)}}">{{$i}}</a></li>
+  @endif
+  @endfor
+
+  {{-- Next Page Link --}}
+  @if ($ls_bills->hasMorePages())
+  <li><a href="{{ $ls_bills->nextPageUrl() }}" rel="next" class="next">&raquo;</a></li> 
+  @else
+  <li><a href="#" class="next disabled">&raquo;</a></li> 
+  @endif
+</ul>
+
+@endif

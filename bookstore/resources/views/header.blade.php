@@ -82,7 +82,7 @@
                 <input type="password" name="password">
               </div>
               <span class="login-popup-link c-dark light"><a class="popup-login-button">Đăng nhập</a> bạn chưa có tài khoản? <a href="{{ route('register') }}" class="bold c-sexy" style="font-size: 14px">Đăng ký</a></span>
-              <center><a href="{{ route('forget') }}"><span class="bold c-sexy forget-link" style="font-size: 14px">Quên mật khẩu?</span></a></center>
+              <center><a href="{{ route('password.email') }}"><span class="bold c-sexy forget-link" style="font-size: 14px">Quên mật khẩu?</span></a></center>
             </form>
           </div>
 
@@ -412,7 +412,7 @@
             <input type="password" name="password">
           </div>
           <center><span class="login-popup-link c-dark light"><a class="mobile-popup-login-button">Đăng nhập</a> bạn chưa có tài khoản? <a href="{{ route('register') }}" class="bold c-sexy" style="font-size: 14px">Đăng ký</a></span>
-            <a href="{{ route('forget') }}"><span class="bold c-sexy forget-link" style="font-size: 14px">Quên mật khẩu?</span></a></center>
+            <a href="{{ route('password.email') }}"><span class="bold c-sexy forget-link" style="font-size: 14px">Quên mật khẩu?</span></a></center>
           </form>
         </div>        
       </section>

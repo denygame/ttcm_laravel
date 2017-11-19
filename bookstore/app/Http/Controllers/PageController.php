@@ -11,6 +11,8 @@ use App\Customer;
 use App\City;
 use App\District;
 use App\Ward;
+use App\Bill;
+use App\Bill_Detail;
 
 
 class PageController extends Controller
@@ -121,33 +123,62 @@ class PageController extends Controller
 		return view('pages.cart');
 	}
 
-	public function getForget()
-	{
-		return view('pages.forget');
-	}
-
-
 
 	public function getBill()
 	{
-		return view('pages.bill');
+		if(Auth::check())
+			$customer = Customer::where('note_user',Auth::user()->id)->first();
+		else $customer = null;
+
+		if($customer!=null){
+			$ls_bills = Bill::where('stt_delete', 0)->where('id_customer',$customer->id)->orderBy('id','desc')->paginate(5);
+			$total_bills = Bill::where('stt_delete', 0)->where('id_customer',$customer->id)->count();
+		}
+		else{ 
+			$ls_bills=null;
+			$total_bills=null;
+		}
+
+
+		return view('pages.bill',compact('ls_bills','total_bills'));
 	}
 
-	public function getBillDetail()
+	public function getBillDetail($id_bill)
 	{
-		return view('pages.bill-detail');
+		$arr = array();
+		$bill = Bill::where('id',$id_bill)->first();
+		$list = Bill_Detail::where('bill_id',$id_bill)->get();
+		foreach ($list as $item) {
+			$book = Book::where('id',$item->book_id)->first();
+			$arr[$item->id]= $book;;
+		}
+		return view('pages.bill-detail',compact('id_bill','list','bill','arr'));
 	}
 
 	public function getCheckout()
 	{
 		$list_city = City::all();
-		return view('pages.checkout',compact('list_city'));
+		if(Auth::check())
+			$customer = Customer::where('note_user',Auth::user()->id)->first();
+		else $customer = null;
+
+		if($customer!=null){
+			$city_cus = City::where('id',$customer->id_city)->first();
+			$list_district = District::where('city_id',$city_cus->id)->get();
+
+			$district_cus = District::where('id',$customer->id_district)->first();
+			$list_ward = Ward::where('district_id',$district_cus->id)->get();
+		}else{
+			$list_district=null;
+			$list_ward=null;
+		}
+		return view('pages.checkout',compact('list_city','customer','list_district','list_ward'));
 	}
 
 
 	public function getResetPass()
 	{
-		return view('pages.reset-pass');
+		return view('pages.change-password');
 	}
 
 

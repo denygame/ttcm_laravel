@@ -32,7 +32,7 @@ Thông tin cá nhân
             <span class="float-left c-sexy medium">TRANG CÁ NHÂN</span>
         </div>
         <div class="small-12 medium-12 large-6 columns page-add">
-            <span class="float-right medium"><a href="" class="c-light">Trang chủ</a><a class="c-light">Thông tin cá nhân</a></span>
+            <span class="float-right medium"><a href="{{ route('home') }}" class="c-light">Trang chủ</a><a class="c-light">Thông tin cá nhân</a></span>
         </div>
     </div>
 </section>
@@ -47,7 +47,7 @@ Thông tin cá nhân
                 <ul>
                     <li><a href="{{ route('profile') }}">Thông tin cá nhân</a></li>
                     <li><a href="{{ route('resetpass') }}">Đổi mật khẩu</a></li>
-                    <li><a href="">Đơn hàng</a></li>
+                    <li><a href="{{ route('bill') }}">Đơn hàng</a></li>
                 </ul>
             </div>
         </div>
@@ -178,7 +178,6 @@ Thông tin cá nhân
                     @endif
                     @endforeach
                     @endif
-
 
                 </select>
             </div>

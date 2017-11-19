@@ -7,6 +7,7 @@ use Validator;
 use App\User;
 use Hash;
 use Auth;
+use App\ResetPassword;
 
 class AccountController extends Controller
 {
@@ -15,7 +16,7 @@ class AccountController extends Controller
 		if(Auth::check()){
 			return redirect()->route('home');
 		}
-		return view('pages.signup');
+		return view('auth.signup');
 	}
 
 	public function postRegister(Request $request)
@@ -74,7 +75,7 @@ class AccountController extends Controller
 		if(Auth::check()){
 			return redirect()->route('home');
 		}
-		return view('pages.login');
+		return view('auth.login');
 	}
 
 
@@ -156,6 +157,52 @@ class AccountController extends Controller
 			}
 		}
 		return response()->json(['error'=>$validator->errors()->all()]);
+	}
 
+	public function checkExitsEmail(Request $request)
+	{
+		$check = User::where('email',$request->email)->first();
+		if($check!=null) return 'true';
+		else return 'false';
+	}
+
+	public function getEmailReset($token)
+	{
+		$response = ResetPassword::select('token','email')->get();
+		foreach ($response as $item) {
+			if (Hash::check($token, $item->token)) {
+				return $item->email;
+				break;
+			}
+		}
+		return null;
+	}
+
+	public function resetPassEmail(Request $request)
+	{
+		$validator = Validator::make($request->all(),
+			[
+				'password'=>'required|min:6',
+				'confirm'=>'required|same:password'
+			],
+
+			[
+				'password.required'=>'Mật khẩu không thể trống',
+				'confirm.required'=>'Mật khẩu nhập lại không thể trống',
+				'password.min'=>'Mật khẩu có ít nhất 6 ký tự',
+				'confirm.same'=>'Mật khẩu nhập lại không chính xác'
+			]
+		);
+
+		if ($validator->passes()) {
+			$user = User::where('email',$request->email)->first();
+			if($user!=null){
+				$user->password = Hash::make($request->password);
+				$user->save();
+				return response()->json(['success'=>route('login')]);
+			}
+			return response()->json(['error'=>'Có lỗi xãy ra']);
+		}
+		return response()->json(['error'=>$validator->errors()->all()]);
 	}
 }
