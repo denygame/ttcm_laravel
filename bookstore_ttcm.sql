@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 19, 2017 at 07:45 PM
+-- Generation Time: Nov 25, 2017 at 07:07 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -21,6 +21,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `bookstore_ttcm`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`id`, `username`, `password`, `remember_token`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'denygame', '$2y$10$C2OpWwVUlY2Zgb.qUZv0Du/pTGDAPR4v3IACbrP0UoFW9gxP8DN5y', 'mQWQVLRoLxWVGr1BGQtJvvCJy2Thvcf1AmjilMCytDxPhBJaZfw4alXyMUSn', 'Nguyễn Thanh Huy', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -47,7 +70,8 @@ CREATE TABLE `bills` (
 --
 
 INSERT INTO `bills` (`id`, `id_customer`, `date_bill`, `total_price`, `status`, `ship`, `people_recv`, `type_checkout`, `stt_delete`, `created_at`, `updated_at`) VALUES
-(33, 1, '2017-11-20 01:40:58', 910000, 'Chưa xử lý', 'Giao hàng tiêu chuẩn (Miễn phí)', '--> Thông tin: (Người nhận là customer có id: 1)<br />\n + Họ tên: Nguyễn Thanh Huy<br />\n + Số điện thoại: 0907352619<br />\n + Thành phố: Hồ Chí Minh, Quận huyện: Quận 6, Phường xã: Phường 11<br />\n + Địa chỉ: 839/11 Hậu Giang Phường 11 Quận 6<br />\n', 'Thanh toán khi nhận hàng', 0, '2017-11-19 18:40:58', '2017-11-19 18:40:58');
+(33, 1, '2017-11-20 01:40:58', 910000, 'Chưa xử lý', 'Giao hàng tiêu chuẩn (Miễn phí)', '--> Thông tin: (Người nhận là customer có id: 1)<br />\n + Họ tên: Nguyễn Thanh Huy<br />\n + Số điện thoại: 0907352619<br />\n + Thành phố: Hồ Chí Minh, Quận huyện: Quận 6, Phường xã: Phường 11<br />\n + Địa chỉ: 839/11 Hậu Giang Phường 11 Quận 6<br />\n', 'Thanh toán khi nhận hàng', 0, '2017-11-19 18:40:58', '2017-11-19 18:40:58'),
+(34, 1, '2017-11-25 21:49:00', 70000, 'Chưa xử lý', 'Giao hàng tiêu chuẩn (Miễn phí)', '--> Thông tin: (Người nhận là customer có id: 1)<br />\n + Họ tên: Nguyễn Thanh Huy<br />\n + Số điện thoại: 0907352619<br />\n + Thành phố: Hồ Chí Minh, Quận huyện: Quận 6, Phường xã: Phường 11<br />\n + Địa chỉ: 839/11 Hậu Giang Phường 11 Quận 6<br />\n', 'Thanh toán khi nhận hàng', 0, '2017-11-25 14:49:00', '2017-11-25 14:49:00');
 
 -- --------------------------------------------------------
 
@@ -70,7 +94,8 @@ CREATE TABLE `bill_detail` (
 --
 
 INSERT INTO `bill_detail` (`id`, `bill_id`, `book_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
-(69, 33, 78, 13, 70000.00, '2017-11-19 18:40:58', '2017-11-19 18:40:58');
+(69, 33, 78, 13, 70000.00, '2017-11-19 18:40:58', '2017-11-19 18:40:58'),
+(70, 34, 77, 1, 70000.00, '2017-11-25 14:49:00', '2017-11-25 14:49:00');
 
 -- --------------------------------------------------------
 
@@ -1094,7 +1119,6 @@ CREATE TABLE `users` (
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `authorities` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1103,9 +1127,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `name`, `authorities`, `created_at`, `updated_at`) VALUES
-(1, 'thanhhuy96.gtvt@gmail.com', '$2y$10$w1Y5DK4/rpBzDZvTCFQ/r.EE1Eixugl3hT4BAErkBkHfHrcq/YPbq', 'HXMxmhh2L6hHxfaf4WIbYZqx4w3mtpi7VteJ2L2ufin5TDfIZ9l2JR7vfGMq', 'Nguyễn Thanh Huy', 0, '2017-11-13 10:05:34', '2017-11-19 11:39:14'),
-(2, 'thanhhuy@gmail.com', '$2y$10$XGpUbNKmfiO39Qk.SccV3O3iKkGvmx.vPE1WkKX9hMDH0vBuhTauC', 'HGE0KqSqm07aXAXne1cHFnRKUVe1ALHZGW6ulRipWtGithV3LvXvXiLxJtvR', '123456', 0, '2017-11-13 12:35:36', '2017-11-17 16:36:34');
+INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'thanhhuy96.gtvt@gmail.com', '$2y$10$w1Y5DK4/rpBzDZvTCFQ/r.EE1Eixugl3hT4BAErkBkHfHrcq/YPbq', 'M2TkHBDduQnAR8ePnIAq2iMQaYWl1UkQtPtTdU67pDutTVTkXdHbUparqLfd', 'Nguyễn Thanh Huy', '2017-11-13 10:05:34', '2017-11-19 11:39:14'),
+(2, 'thanhhuy@gmail.com', '$2y$10$XGpUbNKmfiO39Qk.SccV3O3iKkGvmx.vPE1WkKX9hMDH0vBuhTauC', 'zrXO91iNrUPS09ySC0xqZ3qdj4efShXemb8YWWBMaqyS9I9kXIoaUt3VFr3P', '123456', '2017-11-13 12:35:36', '2017-11-17 16:36:34');
 
 -- --------------------------------------------------------
 
@@ -12127,6 +12151,13 @@ INSERT INTO `wards` (`id`, `name`, `district_id`) VALUES
 --
 
 --
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- Indexes for table `bills`
 --
 ALTER TABLE `bills`
@@ -12205,15 +12236,20 @@ ALTER TABLE `wards`
 --
 
 --
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT for table `books`
 --
@@ -12248,7 +12284,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `wards`
 --
