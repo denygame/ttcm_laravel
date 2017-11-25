@@ -86,7 +86,7 @@ Route::get('order-bill','OrderController@order');
 
 
 
-Route::get('don-hang', ['as'=>'bill','uses'=>'PageController@getBill']);
+Route::get('don-hang', ['as'=>'bill','uses'=>'PageController@getBill'])->middleware('login');;
 
 Route::get('chi-tiet-don-hang/{id_bill}', ['as'=>'bill-detail','uses'=>'PageController@getBillDetail']);
 
@@ -97,34 +97,28 @@ Route::get('chi-tiet-don-hang/{id_bill}', ['as'=>'bill-detail','uses'=>'PageCont
 
 
 
+Route::get('admin/login',['as'=>'getadminlogin','uses'=>'Admin\PageAdminController@getLogin']);
+Route::post('admin/login',['as'=>'postadminlogin','uses'=>'Admin\PageAdminController@postLogin']);
+Route::get('admin/logout',['as'=>'adminlogout','uses'=>'Admin\PageAdminController@logout']);
 
 
 
+Route::group(['prefix' => 'admin','middleware'=>'admin'], function() {
+	Route::get('manage-general', ['as'=>'managegeneral','uses'=>'Admin\PageAdminController@getGeneral']);
+	Route::get('manage-book', ['as'=>'managebook','uses'=>'Admin\PageAdminController@getManageBook']);
+	Route::get('add-book', ['as'=>'addbook','uses'=>'Admin\PageAdminController@getAddBook']);
+	Route::get('manage-category', ['as'=>'managecate','uses'=>'Admin\PageAdminController@getManageCate']);
+	Route::get('manage-account-customer', ['as'=>'manageacc','uses'=>'Admin\PageAdminController@getManageAcc']);
+	Route::get('manage-bill', ['as'=>'managebill','uses'=>'Admin\PageAdminController@getManageBill']);
 
-Route::get('destroy',function(){
-	Auth::logout();
+
+	Route::get('detail-book/{idbook}', ['as'=>'detailbookadmin','uses'=>'Admin\PageAdminController@getDetailBook']);
+	Route::get('detail-account', ['as'=>'detailaccount','uses'=>'Admin\PageAdminController@getDetailAcc']);
+	Route::get('detail-bill/{type}', ['as'=>'detailbill','uses'=>'Admin\PageAdminController@getDetailBill']);
 });
 
-Route::get('aaaa', function() {
-	echo Cart::content();
+
+
+Route::get('test',function(){
+	
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

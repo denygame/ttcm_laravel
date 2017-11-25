@@ -79,19 +79,19 @@ Thanh toán
                     <form id="frm-info-order" class="my-info-checkout">
                         <div>
                             <label>Họ tên <span style="color: red;">*</span> </label>
-                            <input type="text" name="name" value="{{ $cus_name }}" <?if(Auth::check())echo 'disabled';?> id="<?if(Auth::check()) echo Auth::user()->id; else echo 0;?>">
+                            <input type="text" name="name" value="{{ $cus_name }}" <?php if(Auth::check()) echo 'disabled';?> id="<?php if(Auth::check()) echo Auth::user()->id; else echo 0;?>">
                         </div>
                         <div>
                             <label for="">Điện thoại <span style="color: red; font-size: 20px;">*</span> </label>
-                            <input type="text" name="tel" value="{{ $phone_number }}" <?if(Auth::check())echo 'disabled';?>>
+                            <input type="text" name="tel" value="{{ $phone_number }}" <?php if(Auth::check())echo 'disabled';?>>
                         </div>
                         <div>
                             <label for="">Email <span style="color: red; font-size: 20px;">*</span> </label>
-                            <input type="text" name="email" value="{{ $email }}" <?if(Auth::check())echo 'disabled';?>>
+                            <input type="text" name="email" value="{{ $email }}" <?php if(Auth::check())echo 'disabled';?>>
                         </div>
                         <div>
                             <label for="">Tỉnh/Thành phố <span style="color: red; font-size: 20px;">*</span></label>
-                            <select name="city-select" id="city-select" <?if(Auth::check())echo 'disabled';?>>
+                            <select name="city-select" id="city-select" <?php if(Auth::check())echo 'disabled';?>>
                                <option value="">--- Chọn Tỉnh/Thành Phố ---</option>
 
                                @foreach ($list_city as $item)
@@ -106,7 +106,7 @@ Thanh toán
                        </div>
                        <div>
                         <label for="">Quận/Huyện <span style="color: red; font-size: 20px;">*</span> </label>
-                        <select name="district-select" id="district-select" <?if(Auth::check())echo 'disabled';?>>
+                        <select name="district-select" id="district-select" <?php if(Auth::check())echo 'disabled';?>>
                             <option value="">--- Chọn Quận/Huyện ---</option>
 
                             @if ($list_district!=null)
@@ -123,7 +123,7 @@ Thanh toán
                     </div>
                     <div>
                         <label for="">Phường/Xã <span style="color: red; font-size: 20px;">*</span> </label>
-                        <select name="ward-select" id="ward-select" <?if(Auth::check())echo 'disabled';?>>
+                        <select name="ward-select" id="ward-select" <?php if(Auth::check())echo 'disabled';?>>
                             <option value="">--- Chọn Phường/Xã ---</option>
 
                             @if ($list_ward!=null)
@@ -140,7 +140,7 @@ Thanh toán
                     </div>
                     <div>
                         <label for="">Địa chỉ <span style="color: red; font-size: 20px;">*</span> </label>
-                        <input type="text" name="address" value="{{ $address }}" <?if(Auth::check())echo 'disabled';?>>
+                        <input type="text" name="address" value="{{ $address }}" <?php if(Auth::check())echo 'disabled';?>>
                     </div>
                     <div>
                         <a onclick="backToTop();" class="my-popup">Bạn hãy tiếp tục chọn hình thức giao hàng và thanh toán !</a>
