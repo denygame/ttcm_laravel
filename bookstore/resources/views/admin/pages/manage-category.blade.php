@@ -23,12 +23,21 @@ Quản lý danh mục sách
 
 @section('content')
 <hr>
+
+{{-- success with flash-mess --}}
+@if (Session::has('success-category'))    
+<div class="alert alert-success success-category" style="margin-top: 20px">
+	{{ Session::get('success-category') }}
+</div>
+@endif
+
+
 <div class="row-fluid">
 	<div class="span12">
 		<div class="widget-box">
 			<div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
 				<h5>Danh sách</h5>
-				<h5 style="float: right"><a href="" data-toggle="modal" data-target="#modal"><i class="icon-plus-sign"></i> Thêm danh mục</a></h5>
+				<h5 style="float: right"><a href="" data-toggle="modal" data-target="#modal" class="btn-insert-category"><i class="icon-plus-sign"></i> Thêm danh mục</a></h5>
 			</div>
 			<div class="widget-content nopadding">
 				<table class="table table-bordered data-table">
@@ -42,13 +51,22 @@ Quản lý danh mục sách
 						</tr>
 					</thead>
 					<tbody>
+						<?php $i=1; ?>
+
+
+						@foreach ($lscate as $item)
 						<tr class="gradeX">
-							<td>1</td>
-							<td>2</td>
-							<td class="center">4</td>
-							<td class="center"><a href="" data-target="#modal" data-toggle="modal"><i class="icon-edit"></i> Cập nhật</a></td>
+							<td>{{ $i }}</td>
+							<?php $i++; ?>
+							<td>{{ $item->id }}</td>
+							<td class="center">{{ $item->name }}</td>
+							<td class="center"><a id="{{ $item->id }}" href="" data-target="#modal" data-toggle="modal" class="btn-update-category"><i class="icon-edit"></i> Cập nhật</a></td>
 							<td class=" text-center large"><a href=""><i class="icon-remove-sign"></i> Xóa</a></td>
 						</tr>
+						@endforeach
+
+
+						
 					</tbody>
 				</table>
 			</div>
@@ -69,11 +87,12 @@ Quản lý danh mục sách
 			</div>
 			<div class="modal-body" >
 				<div class="container" style="width: 100%">
-					<form class="form-horizontal" >
+					<form class="form-horizontal" id="frm-modal-category">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="control-group">
 							<label class="control-label">Tên danh mục</label>
 							<div class="controls">
-								<input type="text" style="margin: 0 auto; width: 60%" value=""   >
+								<input name="input-modal-category" type="text" style="margin: 0 auto; width: 60%" value=""   >
 							</div>
 						</div>
 					</form>
@@ -81,7 +100,7 @@ Quản lý danh mục sách
 
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cập nhật</button>
+				<button type="button" class="btn btn-default btn-modal-accept-category" data-dismiss="modal">Cập nhật</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
 			</div>
 		</div>

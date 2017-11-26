@@ -119,6 +119,8 @@ Route::group(['prefix' => 'admin','middleware'=>'admin'], function() {
 
 
 
-Route::get('test',function(){
-	
+Route::group(['prefix' => 'admin/ajax'], function() {
+	Route::get('show-cate-update','Admin\AjaxAminController@showCate');
+	Route::post('update-cate','Admin\AjaxAminController@updateCate');
+	Route::post('insert-cate','Admin\AjaxAminController@insertCate');
 });

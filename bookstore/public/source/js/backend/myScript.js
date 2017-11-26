@@ -105,7 +105,7 @@ $(document).ready(function(){
 		var password = $('#register-form').find("input[name='password']").val();
 		var re_password = $('#register-form').find("input[name='re_password']").val();
 
-		alert(password);
+		// alert(password);
 
 		$.ajax({
 			url: "post-register",

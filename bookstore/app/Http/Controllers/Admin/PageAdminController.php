@@ -62,7 +62,8 @@ class PageAdminController extends Controller
 
 	public function getManageCate()
 	{
-		return view('admin.pages.manage-category');
+		$lscate=Category::where('stt_delete',0)->get();
+		return view('admin.pages.manage-category',compact('lscate'));
 	}
 
 	public function getManageAcc()
