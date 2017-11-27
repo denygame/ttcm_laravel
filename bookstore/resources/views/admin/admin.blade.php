@@ -94,7 +94,7 @@
 
     <!--Footer-part-->
     <div class="row-fluid">
-        <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
+        <div id="footer" class="span12"> 2017 &copy; Thực tập chuyên môn - Admin <a href="{{ route('home') }}">T2HD_Bookstore</a> </div>
     </div>
 
     <!--end-Footer-part-->

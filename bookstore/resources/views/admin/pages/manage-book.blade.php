@@ -27,6 +27,13 @@ Quản lý sách
 
 @section('content')
 <hr>
+
+@if (Session::has('success'))
+	<div class="alert alert-success success-manage-book">
+		{{ Session::get('success') }}
+	</div>
+@endif
+
 <div class="row-fluid">
 	<div class="span12">
 		<div class="widget-box">

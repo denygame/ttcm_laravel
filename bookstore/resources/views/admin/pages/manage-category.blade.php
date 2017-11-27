@@ -37,10 +37,11 @@ Quản lý danh mục sách
 		<div class="widget-box">
 			<div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
 				<h5>Danh sách</h5>
-				<h5 style="float: right"><a href="" data-toggle="modal" data-target="#modal" class="btn-insert-category"><i class="icon-plus-sign"></i> Thêm danh mục</a></h5>
+				<h5 style="float: right"><a href="" data-toggle="modal" data-target="#modal-category" class="btn-insert-category"><i class="icon-plus-sign"></i> Thêm danh mục</a></h5>
 			</div>
+
 			<div class="widget-content nopadding">
-				<table class="table table-bordered data-table">
+				<table class="table table-bordered data-table table-category">
 					<thead>
 						<tr>
 							<th width="5%">STT </th>
@@ -52,20 +53,20 @@ Quản lý danh mục sách
 					</thead>
 					<tbody>
 						<?php $i=1; ?>
-
-
 						@foreach ($lscate as $item)
 						<tr class="gradeX">
 							<td>{{ $i }}</td>
 							<?php $i++; ?>
 							<td>{{ $item->id }}</td>
 							<td class="center">{{ $item->name }}</td>
-							<td class="center"><a id="{{ $item->id }}" href="" data-target="#modal" data-toggle="modal" class="btn-update-category"><i class="icon-edit"></i> Cập nhật</a></td>
-							<td class=" text-center large"><a href=""><i class="icon-remove-sign"></i> Xóa</a></td>
+							<td class="center">
+								<a href="" data-target="#modal-category" data-toggle="modal" onclick="showUpdateCategory({{ $item->id }})">
+									<i class="icon-edit"></i> Cập nhật
+								</a>
+							</td>
+							<td class=" text-center large"><a href="" data-target="#modal-category-delete-confirm" data-toggle="modal" onclick="showDeleteCategory({{ $item->id }})"><i class="icon-remove-sign"></i> Xóa</a></td>
 						</tr>
 						@endforeach
-
-
 						
 					</tbody>
 				</table>
@@ -78,7 +79,7 @@ Quản lý danh mục sách
 
 
 {{-- modal add edit category --}}
-<div class="modal fade" id="modal" role="dialog">
+<div class="modal fade" id="modal-category" role="dialog" style="display: none;">
 	<div class="modal-form modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -101,6 +102,33 @@ Quản lý danh mục sách
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default btn-modal-accept-category" data-dismiss="modal">Cập nhật</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{-- modal delete category --}}
+<div class="modal fade" id="modal-category-delete-confirm" role="dialog" style="display: none;">
+	<div class="modal-form modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<center><h4 class="modal-title">Bạn xác nhận xóa danh mục này?</h4></center>
+			</div>
+			<div class="modal-body" >
+				<div class="container" style="width: 100%">
+					<center><label class="control-label lbl-delete-cate"></label></center>
+
+					<form id="frm-delete-confirm-category">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<input type="hidden" name="idcate" value="0">
+					</form>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-modal-accept-delete-category" data-dismiss="modal">Xác nhận</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
 			</div>
 		</div>

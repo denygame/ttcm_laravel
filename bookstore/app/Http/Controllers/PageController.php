@@ -13,7 +13,7 @@ use App\District;
 use App\Ward;
 use App\Bill;
 use App\Bill_Detail;
-
+use App\SliderBanner;
 
 class PageController extends Controller
 {			
@@ -24,10 +24,13 @@ class PageController extends Controller
 	
 	public function getIndex()
 	{
+		$slider=SliderBanner::where('id','<',4)->get();
+		$banner=SliderBanner::where('id','>',4)->get();
+
 		$new_books = Book::where('stt_delete', 0)->where('new',1)->orderBy('id','desc')->limit(5)->get();
 		$hl_books = Book::where('stt_delete',0)->orderBy('highlight','desc')->limit(5)->get();
 		$sold_books = Book::where('stt_delete',0)->orderBy('sold','desc')->limit(5)->get();
-		return view('pages.index',compact('new_books','hl_books','sold_books'));
+		return view('pages.index',compact('new_books','hl_books','sold_books','slider','banner'));
 	}
 
 	public function getProducts($alias)

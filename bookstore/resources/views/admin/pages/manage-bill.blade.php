@@ -1,3 +1,7 @@
+@php
+use App\Http\Controllers\CustomerController;
+@endphp
+
 @extends('admin.admin')
 
 @section('title')
@@ -43,15 +47,22 @@ Quản lý hóa đơn
 						</tr>
 					</thead>
 					<tbody>
+						<?php $i=1; ?>
+						@foreach ($lsbill as $bill)
 						<tr class="gradeX">
-							<td>1</td>
-							<td>2</td>
-							<td></td>
-							<td> </td>
-							<td class="center">4</td>
-							<td class="center">4</td>
-							<td class="center"><a href="{{ route('detailbill','bill') }}"><i class="icon-edit"></i> Chi tiết</a></td>
+							<td>{{ $i }}</td>
+							<?php $i++; ?>
+							<td>{{ $bill->id }}</td>
+							<td>{{ CustomerController::getName($bill->id_customer)['name'] }}</td>
+							<td class="center">{{ $bill->date_bill }}</td>
+							<td class="center">{{ number_format($bill->total_price) }} VNĐ</td>
+							<td>{{ $bill->status }}</td>
+							<td class="center"><a href="{{ route('detailbill',['type'=>'bill','idbill'=>$bill->id]) }}"><i class="icon-edit"></i> Chi tiết</a></td>
 						</tr>
+						@endforeach
+
+
+						
 
 					</tbody>
 				</table>

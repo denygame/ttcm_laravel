@@ -9,6 +9,12 @@ use Validator;
 
 class CustomerController extends Controller
 {
+
+	public static function getName($id)
+	{
+		return Customer::where('id',$id)->select('name')->first();
+	}
+
 	public function update_profile(Request $request)
 	{
 		$validator = Validator::make($request->all(), $this->getRulesProfile(), $this->getMessProfile());

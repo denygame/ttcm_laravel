@@ -1,5 +1,7 @@
   @php
   use App\Http\Controllers\CateController;
+  use App\Http\Controllers\GeneralController;
+  $general=GeneralController::getGeneral();
   @endphp
 
   @inject('cartController', 'App\Http\Controllers\CartController')
@@ -39,7 +41,7 @@
           <div class="reveal" id="login-modal" data-reveal>
             <center><h3></h3></center>
             <div id="list-error-login"></div><br>
-            <center><p>Bookstore T2HD</p></center>
+            <center><p>{{ $general->name }}</p></center>
             <button class="close-button" data-close aria-label="Close modal" type="button">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -100,10 +102,10 @@
     <section id="mobile-topbar"class="hide-for-large">
       <div class="row mobile-topbar-wrap">
         <div class="small-6 medium-6 columns top-mail-wrap">
-          <a href=""class="float-left"><i class="fa fa-envelope-o"></i>T2HD@gmail.com</a>
+          <a href=""class="float-left"><i class="fa fa-envelope-o"></i>{{ $general->email }}</a>
         </div>
         <div class="small-6 medium-6 columns top-phone-wrap">
-          <a href=""class="float-right"><i class="fa fa-phone"></i>+84 1234 567</a>
+          <a href=""class="float-right"><i class="fa fa-phone"></i>{{ $general->tel }}</a>
         </div>
       </div>
     </section>
@@ -116,7 +118,7 @@
           <a href=""class="float-left c-sexy"><i class="fa fa-phone-square c-fun"></i>(01) 123 456 789</a>
         </div>
         <div class="large-4 columns logo-img">
-          <img src="source/img/logo/1.png"class="float-center">
+          <img src="source/img/logo/{{ GeneralController::getLogo()->img }}"class="float-center">
         </div>
 
 

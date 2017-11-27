@@ -8,6 +8,14 @@ use Validator;
 use Auth;
 use App\Book;
 use App\Category;
+use App\User;
+use App\Customer;
+use App\City;
+use App\District;
+use App\Ward;
+use App\Bill;
+use App\Bill_Detail;
+use App\SliderBanner;
 
 class PageAdminController extends Controller
 {
@@ -46,7 +54,10 @@ class PageAdminController extends Controller
 
 	public function getGeneral()
 	{
-		return view('admin.pages.manage-general');
+		$slider=SliderBanner::where('id','<',4)->get();
+		$banner=SliderBanner::where('id','>',4)->get();
+		$logo=SliderBanner::find(4);
+		return view('admin.pages.manage-general',compact('slider','banner','logo'));
 	}
 
 	public function getManageBook()
@@ -57,7 +68,8 @@ class PageAdminController extends Controller
 
 	public function getAddBook()
 	{
-		return view('admin.pages.add-book');
+		$lscate=Category::where('stt_delete',0)->get();
+		return view('admin.pages.add-book',compact('lscate'));
 	}
 
 	public function getManageCate()
@@ -68,12 +80,14 @@ class PageAdminController extends Controller
 
 	public function getManageAcc()
 	{
-		return view('admin.pages.manage-account-customer');
+		$lsuser=User::all();
+		return view('admin.pages.manage-account-customer',compact('lsuser'));
 	}
 
 	public function getManageBill()
 	{
-		return view('admin.pages.manage-bill');
+		$lsbill=Bill::where('stt_delete',0)->get();
+		return view('admin.pages.manage-bill',compact('lsbill'));
 	}
 
 	public function getDetailBook($idbook)
@@ -83,13 +97,38 @@ class PageAdminController extends Controller
 		return view('admin.pages.detail-book',compact('book','lscate'));
 	}
 
-	public function getDetailAcc()
+	public function getDetailAcc($iduser)
 	{
-		return view('admin.pages.detail-account');
+		$user=User::where('id',$iduser)->first();
+		if($user!=null)
+			$customer=Customer::where('note_user',$iduser)->first();
+		else $customer=null;
+
+		$list_city = City::all();
+
+		if($customer!=null){
+			$city_cus = City::where('id',$customer->id_city)->first();
+			$list_district = District::where('city_id',$city_cus->id)->get();
+
+			$district_cus = District::where('id',$customer->id_district)->first();
+			$list_ward = Ward::where('district_id',$district_cus->id)->get();
+
+			$billcus=Bill::where('id_customer',$customer->id)->select('id','date_bill','total_price')->get();
+		}else{
+			$list_district=null;
+			$list_ward=null;
+			$billcus=null;
+		}
+
+		return view('admin.pages.detail-account',compact('customer','list_city','list_district','list_ward','billcus'));
 	}
 
-	public function getDetailBill($type)
+	public function getDetailBill($type,$idbill,$idcustomer=null)
 	{
-		return view('admin.pages.detail-bill',compact('type'));
+		$lsbilldetail=Bill_Detail::where('bill_id',$idbill)->get();
+		if($type!='bill')
+			$customer=Customer::where('id',$idcustomer)->select('id','name')->first();
+		else $customer=null;
+		return view('admin.pages.detail-bill',compact('type','customer','lsbilldetail','idbill'));
 	}
 }

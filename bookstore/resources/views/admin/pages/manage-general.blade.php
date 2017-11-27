@@ -1,3 +1,8 @@
+@php
+use App\Http\Controllers\GeneralController;
+$general=GeneralController::getGeneral();
+@endphp
+
 @extends('admin.admin')
 
 @section('title')
@@ -26,6 +31,23 @@ Quản lý chung
 
 @section('content')
 <hr>
+
+@if (Session::has('success'))
+<div class="alert alert-success success-manage-book">
+	{{ Session::get('success') }}
+</div>
+@endif
+
+@if (count($errors)>0)
+<div class="alert alert-danger">
+	<ul>
+		@foreach ($errors->all() as $err)
+		<li>{{ $err }}</li>
+		@endforeach
+	</ul>
+</div>
+@endif
+
 <div class="row-fluid">
 	<div class="span12">
 		<div class="widget-box">
@@ -33,55 +55,84 @@ Quản lý chung
 				<h5>Thông tin</h5>
 			</div>
 			<div class="widget-content nopadding">
-				<form action="#" method="get" class="form-horizontal">
+
+
+				<form action="{{ route('postgeneral') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
+					
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+
 					<div class="control-group">
 						<label class="control-label">Tên cửa hàng : </label>
 						<div class="controls">
-							<input type="text" value="T2HD books" class="span11" />
+							<input type="text" name="name" value="{{ $general->name }}" class="span11" />
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Email : </label>
 						<div class="controls">
-							<input type="text" class="span11" value="123@gmail.com"/>
+							<input type="text" name="email" class="span11" value="{{ $general->email }}"/>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Số điện thoại :</label>
 						<div class="controls">
-							<input type="text" class="span11" value="0123456879" />
+							<input type="text" name="tel" class="span11" value="{{ $general->tel }}" />
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Logo :</label>
 						<div class="controls">
-							<div><img src="img/logo.png" width="200px" alt=""> <input type="file"  class="span11"  /></div>
-
+							<div><img id="logo-gen" src="source/img/logo/{{ $logo->img }}" width="200px" alt=""> <input type="file" name="logo" class="span11" onchange="changeImgUrl(this,'#logo-gen')" /></div>
 						</div>
+						<br>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label">Các ảnh slider:</label>
+						<label class="control-label">Các ảnh slider (1280 x 600px):</label>
 						<div class="controls">
-							<div><img src="img/logo.png" width="200px" alt=""> <input type="file"  class="span11"  /></div>
+							<div>
+								<img id="slider1-gen" src="source/img/slider/{{ $slider[0]->img }}" width="200px" alt=""> 
+								<input name="slider1"  type="file"  class="span11" onchange="changeImgUrl(this,'#slider1-gen')" />
+							</div>
 							<br>
-							<div><img src="img/logo.png" width="200px" alt=""> <input type="file"  class="span11"  /></div>
+							<div>
+								<img id="slider2-gen" src="source/img/slider/{{ $slider[1]->img }}" width="200px" alt=""> 
+								<input name="slider2"  type="file"  class="span11"  onchange="changeImgUrl(this,'#slider2-gen')"/>
+							</div>
 							<br>
-							<div><img src="img/logo.png" width="200px" alt=""> <input type="file"  class="span11"  /></div>
+							<div>
+								<img id="slider3-gen" src="source/img/slider/{{ $slider[2]->img }}" width="200px" alt=""> 
+								<input name="slider3" type="file"  class="span11"  onchange="changeImgUrl(this,'#slider3-gen')"/>
+							</div>
 							<br>
-							<div><img src="img/logo.png" width="200px" alt=""> <input type="file"  class="span11"  /></div>
-							<br>
-							<div><img src="img/logo.png" width="200px" alt=""> <input type="file"  class="span11"  /></div>
-
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Ảnh banner : </label>
 						<div class="controls">
-							<div><img src="img/logo.png" width="200px" alt=""> <input type="file"  class="span11"  /></div>
+							<div>
+								<img id="ban1-gen" src="source/img/banner/{{ $banner[0]->img }}" width="200px" alt=""> 
+								<input name="banner1" type="file"  class="span11"  onchange="changeImgUrl(this,'#ban1-gen')"/>
+								<p style="color: red; margin-left: 3.5%">Khuyến cáo 500 x 647px</p>
+							</div>							
 							<br>
-							<div><img src="img/logo.png" width="200px" alt=""> <input type="file"  class="span11"  /></div>
+							<div>
+								<img id="ban2-gen" src="source/img/banner/{{ $banner[1]->img }}" width="200px" alt=""> 
+								<input name="banner2" type="file"  class="span11" onchange="changeImgUrl(this,'#ban2-gen')" />
+								<p style="color: red; margin-left: 3.5%">Khuyến cáo 380 x 230px</p>
+							</div>
 							<br>
+							<div>
+								<img id="ban3-gen" src="source/img/banner/{{ $banner[2]->img }}" width="200px" alt=""> 
+								<input name="banner3" type="file"  class="span11" onchange="changeImgUrl(this,'#ban3-gen')" />
+								<p style="color: red; margin-left: 3.5%">Khuyến cáo 380 x 230px</p>
+							</div>
+							<br>
+							<div>
+								<img id="ban4-gen" src="source/img/banner/{{ $banner[3]->img }}" width="200px" alt=""> 
+								<input name="banner4" type="file"  class="span11" onchange="changeImgUrl(this,'#ban4-gen')" />
+								<p style="color: red; margin-left: 3.5%">Khuyến cáo 500 x 647px</p>
+							</div>
 						</div>
 					</div>
 					<div class="form-actions">

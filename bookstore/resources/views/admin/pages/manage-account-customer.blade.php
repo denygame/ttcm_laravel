@@ -37,19 +37,25 @@ Quản lý tài khoản khách hàng
 							<th width="5%">Mã</th>
 							<th>Tên khách hàng</th>
 							<th>Email</th>
-							<th>Số điện thoại</th>
 							<th width="10%">Chi tiết</th>
 						</tr>
 					</thead>
 					<tbody>
+						<?php $i=1; ?>
+						@foreach ($lsuser as $user)
 						<tr class="gradeX">
-							<td>1</td>
-							<td>2</td>
-							<td>ádasd</td>
-							<td>abc@gmail.com</td>
-							<td>016591212969</td>
-							<td class=" text-center large"><a href="{{ route('detailaccount') }}"><i class="icon-edit"></i> Chi tiết</a></td>
+							<td>{{ $i }}</td>
+							<?php $i++; ?>
+							<td>{{ $user->id }}</td>
+							<td>{{ $user->name }}</td>
+							<td>{{ $user->email }}</td>
+							<td class=" text-center large"><a href="{{ route('detailaccount',$user->id) }}"><i class="icon-edit"></i> Chi tiết</a></td>
 						</tr>
+						@endforeach
+
+
+
+						
 					</tbody>
 				</table>
 			</div>

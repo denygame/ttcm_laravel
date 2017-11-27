@@ -1,3 +1,7 @@
+@php
+  use App\Http\Controllers\BookController;
+@endphp
+
 @extends('admin.admin')
 
 @section('title')
@@ -9,18 +13,18 @@ Chi tiết hóa đơn
 
 <div id="breadcrumb"> 
 	<a href="{{ route('managebill') }}" class="">Quản lý hóa đơn</a>
-	<a class="current">Chi tiết hóa đơn</a>
+	<a class="current">Chi tiết hóa đơn {{ $idbill }}</a>
 </div>
-<h1>Chi tiết hóa đơn <span>MAHD</span></h1>
+<h1>Chi tiết hóa đơn <span>{{ $idbill }}</span></h1>
 
 @else
 
 <div id="breadcrumb"> 
 	<a href="{{ route('manageacc') }}" class="tip-bottom">Quản lý tài khoản khách hàng</a>  
-	<a href="{{ route('detailaccount') }}">Chi tiết tài khoản khách hàng</a>
-	<a class="current">Chi tiết hóa đơn</a> 
+	<a href="{{ route('detailaccount',$customer['id']) }}">Chi tiết tài khoản khách hàng {{ $customer['name'] }}</a>
+	<a class="current">Chi tiết hóa đơn {{ $idbill }}</a> 
 </div>
-<h1>Chi tiết hóa đơn <span>MAHD</span></h1>
+<h1>Chi tiết hóa đơn <span>{{ $idbill }}</span></h1>
 
 @endif
 
@@ -41,6 +45,8 @@ Chi tiết hóa đơn
 <hr>
 <div class="row-fluid">
 	<div class="span12">
+		@if ($lsbilldetail!=null)
+
 		<div class="widget-box">
 			<div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
 				<h5>Danh sách</h5>
@@ -59,20 +65,32 @@ Chi tiết hóa đơn
 						</tr>
 					</thead>
 					<tbody>
+						<?php $i=1; ?>
+
+						@foreach ($lsbilldetail as $item)
 						<tr class="gradeX">
-							<td>1</td>
-							<td>2</td>
-							<td></td>
-							<td> </td>
-							<td class="center">4</td>
-							<td class="center">4</td>
-							<td class="center">4</td>
+							<td>{{ $i }}</td>
+							<?php $i++; ?>
+							<td>{{ $item->bill_id }}</td>
+							<td>{{ $item->book_id }}</td>
+							<td>{{ BookController::getName($item->book_id)['name'] }}</td>
+							<td class="center">{{ BookController::getCateName($item->book_id)['name'] }}</td>
+							<td class="center">{{ $item->quantity }}</td>
+							<td class="center">{{ number_format($item->price) }} VNĐ</td>
 						</tr>
+						@endforeach
+
+
+						
 
 					</tbody>
 				</table>
 			</div>
 		</div>
+
+		@else
+
+		@endif
 	</div>
 </div>
 @endsection
